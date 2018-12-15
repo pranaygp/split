@@ -32,7 +32,7 @@ module.exports = async (req, res) => {
           const cost = body.match(costRegex);
           if (!cost) {
             // Missing a cost
-            response.statusCode = 400;
+            res.statusCode = 400;
             return res.end("Could not find a cost in the email body.");
           } else {
             // Use the cost to make a splitwise debt
@@ -40,9 +40,10 @@ module.exports = async (req, res) => {
               Math.round(
                 (parseFloat(`${cost[1] || 0}${cost[3] || 0}`) / 2) * 100
               ) / 100;
+              // The variables for "debt" aren't named correctly
             const data = await sw.createDebt({
-              from: FRIEND_ID,
-              to: ME_ID,
+              from: ME_ID,
+              to: FRIEND_ID,
               group_id: GROUP_ID,
               description: card[1],
               amount
@@ -51,17 +52,17 @@ module.exports = async (req, res) => {
           }
         }
       }
-      response.statusCode = 204;
+      res.statusCode = 204;
       return res.end();
     } else {
-      response.statusCode = 400;
+      res.statusCode = 400;
       return res.end(
         "Missing required JSON fields subject, sender, time and body"
       );
     }
   } catch (e) {
     console.error(e);
-    response.statusCode = 500;
+    res.statusCode = 500;
     return res.end("Unknown Server Error");
   }
 };
