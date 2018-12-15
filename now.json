@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "name": "split",
+  "alias": "split.pranay.gp",
+  "builds": [
+    {
+      "src": "index.js",
+      "use": "@now/node"
+    }
+  ],
+  "env": {
+    "CONSUMER_KEY": "@consumer-key",
+    "CONSUMER_SECRET": "@consumer-secret"
+  }
+}

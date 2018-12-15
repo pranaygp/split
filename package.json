@@ -1,0 +1,7 @@
+{
+  "name": "split",
+  "dependencies": {
+    "as-buffer": "1.6.0",
+    "splitwise": "1.0.0"
+  }
+}
